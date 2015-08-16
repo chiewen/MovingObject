@@ -6,6 +6,13 @@
 
 using namespace std;
 
-void QuadTree::insert_or_update(Object o) {
+constexpr float QuadTree::WIDTH;
+constexpr float QuadTree::HEIGHT;
+constexpr size_t QuadTree::MAX_LEAF_OBJECTS;
 
+vector<Object> QuadTree::range_search(const Range &range) {
+    vector<Object> result;
+    root.range_search(range, result);
+    return result;
 }
+

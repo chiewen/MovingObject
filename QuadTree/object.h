@@ -8,4 +8,5 @@
 struct Object {
     float x, y;
 };
+
 #endif //MOVINGOBJECT_OBJECT_H

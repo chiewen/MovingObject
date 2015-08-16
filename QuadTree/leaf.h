@@ -12,8 +12,26 @@
 using namespace std;
 
 class Leaf : public Entry {
+public:
+    list<Bucket> bucket_list;
+
+public:
+    Leaf(Node *p, int direction) : Entry(p, direction) { bucket_list.emplace_front(); };
+
+    virtual ~Leaf();
+
+    virtual size_t count_objects();
+
+    virtual void insert_object(const Object &object);
+
+    virtual void range_search(const Range &range, vector<Object> &result);
+
+    virtual void print();
+
+    virtual void balance();
+
 private:
-    list <tuple<int, Bucket>> bucket_list;
+    bool need_balance();
 };
 
 #endif //MOVINGOBJECT_LEAF_H

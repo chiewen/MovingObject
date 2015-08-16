@@ -7,14 +7,32 @@
 
 #include <memory>
 #include "entry.h"
+#include "leaf.h"
 
 using namespace std;
 
 class Node : public Entry {
 public:
     float split_x, split_y;
-    Node *parent;
-    unique_ptr<Entry> quad_1, quad_2, quad_3, quad_4;
+    unique_ptr<Entry> quad[4];
 
+public:
+    Node(Node *p, int direction, float x, float y) : Entry(p, direction), split_x(x), split_y(y) {
+        for (int i = 0; i < 4; i++) quad[i].reset(new Leaf(this, i));
+    }
+
+    virtual ~Node();
+
+    virtual void range_search(const Range &range, vector<Object> &result);
+
+    virtual void insert_object(const Object &object);
+
+    virtual void print();
+
+    virtual void balance();
+
+    virtual size_t count_objects();
+
+    void assign_child(int q, unique_ptr<Entry> e);
 };
 #endif //MOVINGOBJECT_NODE_H

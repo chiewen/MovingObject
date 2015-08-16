@@ -8,9 +8,11 @@
 #include "object.h"
 
 struct Bucket {
-//TODO find proper number of objects to make one slot fit in a word.
-    Object objects[6];
+    //TODO find proper objects number to make one bucket (along with an associated pointer?) fit in a word.
+    static constexpr int BUCKET_LENGTH = 7;
 
+    int number = 0;
+    Object objects[BUCKET_LENGTH];
 };
 
 #endif //MOVINGOBJECT_BUCKET_H
