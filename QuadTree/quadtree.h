@@ -4,6 +4,7 @@
 
 #ifndef MOVINGOBJECT_QUADTREE_H
 #define MOVINGOBJECT_QUADTREE_H
+
 #include "entry.h"
 #include "object.h"
 #include "node.h"
@@ -13,6 +14,7 @@ public:
     static constexpr float WIDTH = 20000;
     static constexpr float HEIGHT = 20000;
     static constexpr size_t MAX_LEAF_OBJECTS = Bucket::BUCKET_LENGTH * 6;
+
 public:
     Node root;
 

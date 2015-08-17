@@ -39,3 +39,7 @@ size_t Node::count_objects() {
     return accumulate(quad, quad + 4, static_cast<size_t>(0),
                       [](size_t sum, unique_ptr<Entry> &p) { return sum + p->count_objects(); });
 }
+
+void Node::all_objects(vector<Object> &objects) {
+    for (auto &q : quad) q->all_objects(objects);
+}

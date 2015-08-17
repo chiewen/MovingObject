@@ -26,10 +26,10 @@ void Leaf::insert_object(const Object &object) {
 
     bucket_list.front().objects[bucket_list.front().number++] = object;
 
-    if (need_balance()) balance();
+    if (is_need_balance()) balance();
 }
 
-bool Leaf::need_balance() { return count_objects() > QuadTree::MAX_LEAF_OBJECTS; }
+bool Leaf::is_need_balance() { return count_objects() > QuadTree::MAX_LEAF_OBJECTS; }
 
 size_t Leaf::count_objects() {
     return Bucket::BUCKET_LENGTH * (bucket_list.size() - 1) + bucket_list.front().number;
@@ -73,4 +73,9 @@ void Leaf::balance() {
     for_each(p2, objects.end(), [&n](const Object &o) { n->quad[3]->insert_object(o); });
 
     parent->assign_child(direction, move(n));
+}
+
+void Leaf::all_objects(vector<Object> &objects) {
+    for (const auto &b : bucket_list)
+        copy(b.objects, b.objects + b.number, back_inserter(objects));
 }

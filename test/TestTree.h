@@ -5,10 +5,12 @@
 #ifndef MOVINGOBJECT_TESTTREE_H
 #define MOVINGOBJECT_TESTTREE_H
 
-
-#include <bits/unique_ptr.h>
+#include <iostream>
+#include <memory>
 #include "../QuadTree/entry.h"
 #include "../QuadTree/node.h"
+
+using namespace std;
 
 class TestTree {
 public:

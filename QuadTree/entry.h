@@ -17,12 +17,14 @@ typedef tuple<float, float, float, float> Range;
 
 class Node;
 
-class Leaf;
-
 class Entry {
+    friend class TestTree;
+
 protected:
     Node *parent;
     int direction;
+
+    virtual void all_objects(vector<Object> &objects) = 0;
 
 public:
     Entry(Node *parent, int direction) : parent(parent), direction(direction) { }
