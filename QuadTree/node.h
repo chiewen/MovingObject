@@ -16,6 +16,9 @@ public:
     float split_x, split_y;
     unique_ptr<Entry> quad[4];
 
+private:
+    virtual bool should_balance();
+
 public:
     Node(Node *p, int direction, float x, float y) : Entry(p, direction), split_x(x), split_y(y) {
         for (int i = 0; i < 4; i++) quad[i].reset(new Leaf(this, i));
@@ -29,13 +32,13 @@ public:
 
     virtual void print();
 
-    virtual void balance();
-
     virtual size_t count_objects();
 
     void assign_child(int q, unique_ptr<Entry> e);
 
     void all_objects(vector<Object> &objects);
+
+    virtual void balance_if_necessary();
 };
 
 #endif //MOVINGOBJECT_NODE_H

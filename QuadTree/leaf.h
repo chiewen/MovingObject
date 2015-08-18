@@ -7,18 +7,25 @@
 
 #include "entry.h"
 #include "bucket.h"
-#include "list"
+#include <list>
 
 using namespace std;
 
 class Leaf : public Entry {
+private:
+    virtual bool should_balance();
+
 public:
     list<Bucket> bucket_list;
 
+    static constexpr size_t MAX_LEAF_OBJECTS = Bucket::BUCKET_LENGTH * 6;
+
 public:
+    virtual void balance_if_necessary();
+
     Leaf(Node *p, int direction) : Entry(p, direction) { bucket_list.emplace_front(); };
 
-    virtual ~Leaf();
+    virtual ~Leaf() { };
 
     virtual size_t count_objects();
 
@@ -28,13 +35,7 @@ public:
 
     virtual void print();
 
-    virtual void balance();
-
     virtual void all_objects(vector<Object> &objects);
-
-private:
-    bool is_need_balance();
-
 };
 
 #endif //MOVINGOBJECT_LEAF_H

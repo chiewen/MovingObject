@@ -13,7 +13,6 @@ class QuadTree {
 public:
     static constexpr float WIDTH = 20000;
     static constexpr float HEIGHT = 20000;
-    static constexpr size_t MAX_LEAF_OBJECTS = Bucket::BUCKET_LENGTH * 6;
 
 public:
     Node root;

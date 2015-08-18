@@ -5,16 +5,17 @@
 #include <iostream>
 #include "TestTree.h"
 #include "../QuadTree/quadtree.h"
+#include "../DataGenerator/DataGenerator.h"
 
 
 void TestTree::test() {
     QuadTree qt;
-    qt.root.quad[0].reset(new Node(&qt.root, 0, 0, 0));
+    auto data = DataGenerator::generate_ordinary(20000, QuadTree::WIDTH, QuadTree::HEIGHT);
 
-    Object o = {1, 1};
+    cout << data.size() << endl << "============" << endl;
 
-    for (int i = 0; i < 43; i++)
-        static_cast<Leaf *>(qt.root.quad[1].get())->insert_object(o);
+    qt.root.insert_object_range(data.begin(), data.end());
+    qt.root.balance_if_necessary();
 
     qt.root.print();
 

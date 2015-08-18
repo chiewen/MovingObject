@@ -7,13 +7,15 @@
 
 #include <tuple>
 #include <vector>
+#include <algorithm>
+#include <memory>
 #include "object.h"
 
 using namespace std;
 
-// define a square range in the plane.
-// x_lower, y_lower, x_upper, y_upper
+// define a square range in the plane. x_lower, y_lower, x_upper, y_upper
 typedef tuple<float, float, float, float> Range;
+
 
 class Node;
 
@@ -22,15 +24,17 @@ class Entry {
 
 protected:
     Node *parent;
+
     int direction;
 
-    tuple<float, float, vector<Object>::iterator, vector<Object>::iterator>
-            split_four(size_t obj_num, vector<Object> &objects) const;
+    virtual bool should_balance() = 0;
+
+    void balance();
 
 public:
     Entry(Node *parent, int direction) : parent(parent), direction(direction) { }
 
-    virtual ~Entry();
+    virtual ~Entry() { };
 
     virtual void all_objects(vector<Object> &objects) = 0;
 
@@ -38,11 +42,13 @@ public:
 
     virtual void insert_object(const Object &object) = 0;
 
-    virtual void balance() = 0;
-
     virtual size_t count_objects() = 0;
 
     virtual void print() = 0;
+
+    void insert_object_range(vector<Object>::iterator b, vector<Object>::iterator e);
+
+    virtual void balance_if_necessary() = 0;
 };
 
 #endif //MOVINGOBJECT_ENTRY_H

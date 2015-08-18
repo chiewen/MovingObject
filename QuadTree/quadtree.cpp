@@ -8,7 +8,6 @@ using namespace std;
 
 constexpr float QuadTree::WIDTH;
 constexpr float QuadTree::HEIGHT;
-constexpr size_t QuadTree::MAX_LEAF_OBJECTS;
 
 vector<Object> QuadTree::range_search(const Range &range) {
     vector<Object> result;
