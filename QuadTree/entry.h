@@ -24,12 +24,15 @@ protected:
     Node *parent;
     int direction;
 
-    virtual void all_objects(vector<Object> &objects) = 0;
+    tuple<float, float, vector<Object>::iterator, vector<Object>::iterator>
+            split_four(size_t obj_num, vector<Object> &objects) const;
 
 public:
     Entry(Node *parent, int direction) : parent(parent), direction(direction) { }
 
     virtual ~Entry();
+
+    virtual void all_objects(vector<Object> &objects) = 0;
 
     virtual void range_search(const Range &range, vector<Object> &result) = 0;
 

@@ -32,6 +32,10 @@ void Node::print() {
 }
 
 void Node::balance() {
+    vector<Object> all;
+    all.reserve(count_objects());
+    all_objects(all);
+
 
 }
 

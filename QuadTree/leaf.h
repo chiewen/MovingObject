@@ -30,10 +30,11 @@ public:
 
     virtual void balance();
 
+    virtual void all_objects(vector<Object> &objects);
+
 private:
     bool is_need_balance();
 
-    virtual void all_objects(vector<Object> &objects);
 };
 
 #endif //MOVINGOBJECT_LEAF_H

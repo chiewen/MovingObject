@@ -35,7 +35,6 @@ public:
 
     void assign_child(int q, unique_ptr<Entry> e);
 
-private:
     void all_objects(vector<Object> &objects);
 };
 

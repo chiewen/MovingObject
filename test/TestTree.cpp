@@ -6,6 +6,7 @@
 #include "TestTree.h"
 #include "../QuadTree/quadtree.h"
 
+
 void TestTree::test() {
     QuadTree qt;
     qt.root.quad[0].reset(new Node(&qt.root, 0, 0, 0));
@@ -17,7 +18,10 @@ void TestTree::test() {
 
     qt.root.print();
 
-    cout << "total:" << qt.root.count_objects() << endl;
+    vector<Object> all;
+    qt.root.all_objects(all);
+
+    cout << "total:" << all.size() << endl;
     cout << "total:" << qt.root.count_objects() << endl;
 
     auto r = qt.range_search(make_tuple(0, 0, 1, 1));
