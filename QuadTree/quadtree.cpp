@@ -6,9 +6,6 @@
 
 using namespace std;
 
-constexpr float QuadTree::WIDTH;
-constexpr float QuadTree::HEIGHT;
-
 vector<Object> QuadTree::range_search(const Range &range) {
     vector<Object> result;
     root.range_search(range, result);

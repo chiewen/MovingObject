@@ -10,22 +10,23 @@
 
 void TestTree::test() {
     QuadTree qt;
-    auto data = DataGenerator::generate_ordinary(20000, QuadTree::WIDTH, QuadTree::HEIGHT);
+    vector<Object> data;
+    DataGenerator::generate_ordinary(2000, QuadTree::WIDTH, QuadTree::HEIGHT, data);
 
     cout << data.size() << endl << "============" << endl;
 
     qt.root.insert_object_range(data.begin(), data.end());
     qt.root.balance_if_necessary();
 
-    qt.root.print();
+    auto r = qt.range_search(Range{0, 0, 20000, 20000});
 
-    vector<Object> all;
-    qt.root.all_objects(all);
-
-    cout << "total:" << all.size() << endl;
-    cout << "total:" << qt.root.count_objects() << endl;
-
-    auto r = qt.range_search(make_tuple(0, 0, 1, 1));
+    for (auto &o: r) { cout << "(" << o.id << ", " << o.x << ", " << o.y << ") "; };
 
     cout << endl << r.size() << endl;
+}
+
+void TestTree::gTest() {
+    QuadTree qt;
+    vector<Object> data;
+    DataGenerator::generate_ordinary(2000, QuadTree::WIDTH, QuadTree::HEIGHT, data);
 }

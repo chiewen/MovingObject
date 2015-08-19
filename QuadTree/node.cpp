@@ -9,7 +9,7 @@
 using namespace std;
 
 void Node::range_search(const Range &range, vector<Object> &result) {
-    for (auto &q : quad) q->range_search(range, result);
+    if (is_overlap(range)) for (auto &q : quad) q->range_search(range, result);
 }
 
 Node::~Node() { }
@@ -32,7 +32,7 @@ void Node::print() {
 }
 
 size_t Node::count_objects() {
-    return accumulate(quad, quad + 4, static_cast<size_t>(0),
+    return accumulate(begin(quad), end(quad), static_cast<size_t>(0),
                       [](size_t sum, unique_ptr<Entry> &p) { return sum + p->count_objects(); });
 }
 
@@ -49,11 +49,19 @@ bool Node::should_balance() {
             quad[3]->count_objects()
     };
 
-    auto mm = minmax_element(object_numbers, object_numbers + 4);
+    auto mm = minmax_element(begin(object_numbers), end(object_numbers));
     return *mm.first < 0.6 * *mm.second;
 }
 
 void Node::balance_if_necessary() {
     if (should_balance()) balance();
-    else for_each(quad, quad + 4, [](unique_ptr<Entry> &e) { e->balance_if_necessary(); });
+    else for (auto &e :quad) { e->balance_if_necessary(); };
+}
+
+bool Node::is_overlap(const Range &range) {
+    return (parent == nullptr) ||
+           (direction == 0 && range.x_upper >= parent->split_x && range.y_upper >= parent->split_y) ||
+           (direction == 1 && range.x_lower < parent->split_x && range.y_upper >= parent->split_y) ||
+           (direction == 2 && range.x_lower < parent->split_x && range.y_lower < parent->split_y) ||
+           (direction == 3 && range.x_upper >= parent->split_x && range.y_lower < parent->split_y);
 }

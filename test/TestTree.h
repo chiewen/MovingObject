@@ -16,14 +16,7 @@ class TestTree {
 public:
     void test();
 
-    void f(unique_ptr<Entry> &u) {
-        cout << "u:" << u->count_objects() << endl;
-    }
-
-    void tt() {
-        unique_ptr<Entry> p(new Node(nullptr, 0, 1, 1));
-        f(p);
-    }
+    void gTest();
 };
 
 

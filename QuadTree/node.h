@@ -19,6 +19,8 @@ public:
 private:
     virtual bool should_balance();
 
+    bool is_overlap(const Range &range);
+
 public:
     Node(Node *p, int direction, float x, float y) : Entry(p, direction), split_x(x), split_y(y) {
         for (int i = 0; i < 4; i++) quad[i].reset(new Leaf(this, i));

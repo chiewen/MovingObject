@@ -13,9 +13,9 @@
 
 using namespace std;
 
-// define a square range in the plane. x_lower, y_lower, x_upper, y_upper
-typedef tuple<float, float, float, float> Range;
-
+struct Range {
+    float x_lower, y_lower, x_upper, y_upper;
+};
 
 class Node;
 

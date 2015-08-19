@@ -12,7 +12,7 @@ using namespace std;
 
 class DataGenerator {
 public:
-    static vector<Object> generate_ordinary(size_t num, float width, float height);
+    static void generate_ordinary(size_t num, float width, float height, vector<Object> &objects);
 };
 
 

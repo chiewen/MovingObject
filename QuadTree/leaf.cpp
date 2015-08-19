@@ -9,11 +9,11 @@
 
 using namespace std;
 
-constexpr size_t Leaf::MAX_LEAF_OBJECTS;
-
 void Leaf::range_search(const Range &range, vector<Object> &result) {
     for (const auto &b : bucket_list) {
-        copy(b.objects, b.objects + b.number, back_inserter(result));
+        copy_if(b.objects, b.objects + b.number, back_inserter(result), [&](const Object &o) {
+            return (o.x >= range.x_lower && o.x <= range.x_upper && o.y >= range.y_lower && o.y <= range.y_upper);
+        });
     }
 }
 

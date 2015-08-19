@@ -41,7 +41,7 @@ void Entry::balance() {
     n->quad[2]->insert_object_range(objects.begin() + obj_num / 2, p2);
     n->quad[3]->insert_object_range(p2, objects.end());
 
-    for_each(n->quad, n->quad + 4, [](unique_ptr<Entry> &q) { q->balance_if_necessary(); });
+    for (auto &q :n->quad) { q->balance_if_necessary(); };
 
     parent->assign_child(direction, move(n));
 }
