@@ -25,8 +25,3 @@ void TestTree::test() {
     cout << endl << r.size() << endl;
 }
 
-void TestTree::gTest() {
-    QuadTree qt;
-    vector<Object> data;
-    DataGenerator::generate_ordinary(2000, QuadTree::WIDTH, QuadTree::HEIGHT, data);
-}

@@ -16,7 +16,6 @@ class TestTree {
 public:
     void test();
 
-    void gTest();
 };
 
 
