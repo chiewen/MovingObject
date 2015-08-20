@@ -19,7 +19,7 @@ public:
 private:
     virtual bool should_balance();
 
-    bool is_overlap(const Range &range);
+    bool is_overlap(const Range &range, int);
 
 public:
     Node(Node *p, int direction, float x, float y) : Entry(p, direction), split_x(x), split_y(y) {
@@ -36,7 +36,7 @@ public:
 
     virtual size_t count_objects();
 
-    void assign_child(int q, unique_ptr<Entry> e);
+    void assign_child(int direction, unique_ptr<Entry> child);
 
     void all_objects(vector<Object> &objects);
 

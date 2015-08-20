@@ -9,13 +9,13 @@
 using namespace std;
 
 void Node::range_search(const Range &range, vector<Object> &result) {
-    if (is_overlap(range)) for (auto &q : quad) q->range_search(range, result);
+    for (auto &q: quad) if (is_overlap(range, q->direction)) q->range_search(range, result);
 }
 
 Node::~Node() { }
 
-void Node::assign_child(int q, unique_ptr<Entry> e) {
-    quad[q] = move(e);
+void Node::assign_child(int direction, unique_ptr<Entry> child) {
+    quad[direction] = move(child);
 }
 
 void Node::insert_object(const Object &object) {
@@ -58,10 +58,9 @@ void Node::balance_if_necessary() {
     else for (auto &e :quad) { e->balance_if_necessary(); };
 }
 
-bool Node::is_overlap(const Range &range) {
-    return (parent == nullptr) ||
-           (direction == 0 && range.x_upper >= parent->split_x && range.y_upper >= parent->split_y) ||
-           (direction == 1 && range.x_lower < parent->split_x && range.y_upper >= parent->split_y) ||
-           (direction == 2 && range.x_lower < parent->split_x && range.y_lower < parent->split_y) ||
-           (direction == 3 && range.x_upper >= parent->split_x && range.y_lower < parent->split_y);
+bool Node::is_overlap(const Range &range, int d) {
+    return (d == 0 && range.x_upper >= split_x && range.y_upper >= split_y) ||
+           (d == 1 && range.x_lower < split_x && range.y_upper >= split_y) ||
+           (d == 2 && range.x_lower < split_x && range.y_lower < split_y) ||
+           (d == 3 && range.x_upper >= split_x && range.y_lower < split_y);
 }

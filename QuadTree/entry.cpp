@@ -30,7 +30,7 @@ void Entry::balance() {
     float middle_y = objects[obj_num / 2].y - 0.1f;
 
     auto p1 = partition(objects.begin(), objects.begin() + obj_num / 2,
-                        [middle_x](const Object &o) { return o.x > middle_x; });
+                        [middle_x](const Object &o) { return o.x >= middle_x; });
     auto p2 = partition(objects.begin() + obj_num / 2, objects.end(),
                         [middle_x](const Object &o) { return o.x < middle_x; });
 
