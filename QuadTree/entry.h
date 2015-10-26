@@ -22,14 +22,16 @@ class Node;
 class Entry {
     friend class TestTree;
 
+    friend class Node;
+
 protected:
     Node *parent;
-
-    int direction;
 
     virtual bool should_balance() = 0;
 
     void balance();
+
+    int direction;
 
 public:
     Entry(Node *parent, int direction) : parent(parent), direction(direction) { }
